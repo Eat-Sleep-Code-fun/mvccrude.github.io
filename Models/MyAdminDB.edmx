@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departmenttbl">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DName " Type="varchar" MaxLength="50" />
+          <Property Name="DHOD" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Facultytbl">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FFname " Type="varchar" MaxLength="50" />
+          <Property Name="FLname " Type="varchar" MaxLength="50" />
+          <Property Name="FAddress" Type="varchar" MaxLength="50" />
+          <Property Name="DID" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UFname " Type="varchar" MaxLength="50" />
+          <Property Name="ULname" Type="varchar" MaxLength="50" />
+          <Property Name="UEmailID" Type="varchar" MaxLength="50" />
+          <Property Name="UPassword" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Facultytbl_ToTable">
+          <End Role="Departmenttbl" Type="Self.Departmenttbl" Multiplicity="0..1" />
+          <End Role="Facultytbl" Type="Self.Facultytbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departmenttbl">
+              <PropertyRef Name="DID" />
+            </Principal>
+            <Dependent Role="Facultytbl">
+              <PropertyRef Name="DID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddEditDeleteDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DID" Type="int" Mode="In" />
+          <Parameter Name="DName" Type="varchar" Mode="In" />
+          <Parameter Name="DHOD" Type="varchar" Mode="In" />
+          <Parameter Name="OptType" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MyDBModelStoreContainer">
+          <EntitySet Name="Departmenttbl" EntityType="Self.Departmenttbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facultytbl" EntityType="Self.Facultytbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Facultytbl_ToTable" Association="Self.FK_Facultytbl_ToTable">
+            <End Role="Departmenttbl" EntitySet="Departmenttbl" />
+            <End Role="Facultytbl" EntitySet="Facultytbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departmenttbl">
+          <Key>
+            <PropertyRef Name="DID" />
+          </Key>
+          <Property Name="DID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DName_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DHOD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Facultytbls" Relationship="Self.FK_Facultytbl_ToTable" FromRole="Departmenttbl" ToRole="Facultytbl" />
+        </EntityType>
+        <EntityType Name="Facultytbl">
+          <Key>
+            <PropertyRef Name="FID" />
+          </Key>
+          <Property Name="FID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FFname_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FLname_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DID" Type="Int32" />
+          <NavigationProperty Name="Departmenttbl" Relationship="Self.FK_Facultytbl_ToTable" FromRole="Facultytbl" ToRole="Departmenttbl" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UFname_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ULname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Facultytbl_ToTable">
+          <End Role="Departmenttbl" Type="Self.Departmenttbl" Multiplicity="0..1" />
+          <End Role="Facultytbl" Type="Self.Facultytbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departmenttbl">
+              <PropertyRef Name="DID" />
+            </Principal>
+            <Dependent Role="Facultytbl">
+              <PropertyRef Name="DID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departmenttbls" EntityType="Self.Departmenttbl" />
+          <EntitySet Name="Facultytbls" EntityType="Self.Facultytbl" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Facultytbl_ToTable" Association="Self.FK_Facultytbl_ToTable">
+            <End Role="Departmenttbl" EntitySet="Departmenttbls" />
+            <End Role="Facultytbl" EntitySet="Facultytbls" />
+          </AssociationSet>
+          <FunctionImport Name="AddEditDeleteDepartment">
+            <Parameter Name="DID" Mode="In" Type="Int32" />
+            <Parameter Name="DName" Mode="In" Type="String" />
+            <Parameter Name="DHOD" Mode="In" Type="String" />
+            <Parameter Name="OptType" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllDepartment" ReturnType="Collection(MyDBModel.GetAllDepartment_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetAllDepartment_Result">
+          <Property Type="Int32" Name="DID" Nullable="false" />
+          <Property Type="String" Name="DName_" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DHOD" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyDBModelStoreContainer" CdmEntityContainer="MyDBEntities">
+          <EntitySetMapping Name="Departmenttbls">
+            <EntityTypeMapping TypeName="MyDBModel.Departmenttbl">
+              <MappingFragment StoreEntitySet="Departmenttbl">
+                <ScalarProperty Name="DID" ColumnName="DID" />
+                <ScalarProperty Name="DName_" ColumnName="DName " />
+                <ScalarProperty Name="DHOD" ColumnName="DHOD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facultytbls">
+            <EntityTypeMapping TypeName="MyDBModel.Facultytbl">
+              <MappingFragment StoreEntitySet="Facultytbl">
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="FFname_" ColumnName="FFname " />
+                <ScalarProperty Name="FLname_" ColumnName="FLname " />
+                <ScalarProperty Name="FAddress" ColumnName="FAddress" />
+                <ScalarProperty Name="DID" ColumnName="DID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MyDBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="UFname_" ColumnName="UFname " />
+                <ScalarProperty Name="ULname" ColumnName="ULname" />
+                <ScalarProperty Name="UEmailID" ColumnName="UEmailID" />
+                <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddEditDeleteDepartment" FunctionName="MyDBModel.Store.AddEditDeleteDepartment" />
+          <FunctionImportMapping FunctionImportName="GetAllDepartment" FunctionName="MyDBModel.Store.GetAllDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MyDBModel.GetAllDepartment_Result">
+                <ScalarProperty Name="DID" ColumnName="DID" />
+                <ScalarProperty Name="DName_" ColumnName="DName " />
+                <ScalarProperty Name="DHOD" ColumnName="DHOD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

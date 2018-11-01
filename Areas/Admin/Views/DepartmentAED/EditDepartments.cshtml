@@ -1,0 +1,25 @@
+﻿@using AdminWeb.Models;
+@{
+    ViewBag.Title = "EditDepartments";
+    Departmenttbl dp = Model;
+}
+
+<h2>EditDepartments</h2>
+@TempData["msg"]
+@using (Html.BeginForm("EditDepartments", "DepartmentAED", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken();
+
+    <input type="hidden" name="hdnID" value="@dp.DID" />
+    <div class="form-group">
+        <label for="email">Department Name</label>
+        <input type="text" class="form-control" value="@dp.DName_" id="depname" name="depname">
+    </div>
+    <div class="form-group">
+        <label for="pwd">DEpartments HOD</label>
+        <input type="text" class="form-control" value="@dp.DHOD" id="dephod" name="dephod">
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+    <button type="reset" class="btn btn-danger">Cancel</button>
+}

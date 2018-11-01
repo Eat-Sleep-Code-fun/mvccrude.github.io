@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyDBModelStoreContainer" CdmEntityContainer="MyDBEntities">
+    <EntitySetMapping Name="Departmenttbls">
+      <EntityTypeMapping TypeName="MyDBModel.Departmenttbl">
+        <MappingFragment StoreEntitySet="Departmenttbl">
+          <ScalarProperty Name="DID" ColumnName="DID" />
+          <ScalarProperty Name="DName_" ColumnName="DName " />
+          <ScalarProperty Name="DHOD" ColumnName="DHOD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facultytbls">
+      <EntityTypeMapping TypeName="MyDBModel.Facultytbl">
+        <MappingFragment StoreEntitySet="Facultytbl">
+          <ScalarProperty Name="FID" ColumnName="FID" />
+          <ScalarProperty Name="FFname_" ColumnName="FFname " />
+          <ScalarProperty Name="FLname_" ColumnName="FLname " />
+          <ScalarProperty Name="FAddress" ColumnName="FAddress" />
+          <ScalarProperty Name="DID" ColumnName="DID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MyDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="UFname_" ColumnName="UFname " />
+          <ScalarProperty Name="ULname" ColumnName="ULname" />
+          <ScalarProperty Name="UEmailID" ColumnName="UEmailID" />
+          <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddEditDeleteDepartment" FunctionName="MyDBModel.Store.AddEditDeleteDepartment" />
+    <FunctionImportMapping FunctionImportName="GetAllDepartment" FunctionName="MyDBModel.Store.GetAllDepartment">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyDBModel.GetAllDepartment_Result">
+          <ScalarProperty Name="DID" ColumnName="DID" />
+          <ScalarProperty Name="DName_" ColumnName="DName " />
+          <ScalarProperty Name="DHOD" ColumnName="DHOD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

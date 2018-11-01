@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Departmenttbl">
+    <Key>
+      <PropertyRef Name="DID" />
+    </Key>
+    <Property Name="DID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DName " Type="varchar" MaxLength="50" />
+    <Property Name="DHOD" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Facultytbl">
+    <Key>
+      <PropertyRef Name="FID" />
+    </Key>
+    <Property Name="FID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FFname " Type="varchar" MaxLength="50" />
+    <Property Name="FLname " Type="varchar" MaxLength="50" />
+    <Property Name="FAddress" Type="varchar" MaxLength="50" />
+    <Property Name="DID" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UFname " Type="varchar" MaxLength="50" />
+    <Property Name="ULname" Type="varchar" MaxLength="50" />
+    <Property Name="UEmailID" Type="varchar" MaxLength="50" />
+    <Property Name="UPassword" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Facultytbl_ToTable">
+    <End Role="Departmenttbl" Type="Self.Departmenttbl" Multiplicity="0..1" />
+    <End Role="Facultytbl" Type="Self.Facultytbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departmenttbl">
+        <PropertyRef Name="DID" />
+      </Principal>
+      <Dependent Role="Facultytbl">
+        <PropertyRef Name="DID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddEditDeleteDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DID" Type="int" Mode="In" />
+    <Parameter Name="DName" Type="varchar" Mode="In" />
+    <Parameter Name="DHOD" Type="varchar" Mode="In" />
+    <Parameter Name="OptType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetAllDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="MyDBModelStoreContainer">
+    <EntitySet Name="Departmenttbl" EntityType="Self.Departmenttbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Facultytbl" EntityType="Self.Facultytbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Facultytbl_ToTable" Association="Self.FK_Facultytbl_ToTable">
+      <End Role="Departmenttbl" EntitySet="Departmenttbl" />
+      <End Role="Facultytbl" EntitySet="Facultytbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

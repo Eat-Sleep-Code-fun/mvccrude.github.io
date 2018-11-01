@@ -1,0 +1,35 @@
+﻿@using AdminWeb.Models;
+@{
+    ViewBag.Title = "ViewDEP";
+    List<Departmenttbl> li = Model;
+}
+
+<h2>ViewDEP</h2>
+
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Department ID</th>
+            <th>Department Name</th>
+            <th>Department HOD</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in li)
+        {
+            <tr>
+                
+                <td>@item.DID</td>
+                <td>@item.DName_</td>
+                <td>@item.DHOD</td>
+                <td>
+                    <a href="EditDepartments/@item.DID" class="btn-link" >Edit</a> | 
+                    <a href="DeleteDeparetments/@item.DID"  onclick="return confirm('Are you sure want to Delete')" class="btn-link">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

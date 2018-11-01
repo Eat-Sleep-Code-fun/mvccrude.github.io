@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "AddDepartments";
+}
+
+<h2>AddDepartments</h2>
+@ViewBag.msg
+@using (Html.BeginForm("AddDepartments", "DepartmentAED", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken();
+
+    <input type="hidden" name="hdnID" value="0" />
+    <div class="form-group">
+        <label for="email">Department Name</label>
+        <input type="text" class="form-control" id="depname" name="depname">
+    </div>
+    <div class="form-group">
+        <label for="pwd">DEpartments HOD</label>
+        <input type="text" class="form-control" id="dephod" name="dephod">
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger">Cancel</button>
+}
+
